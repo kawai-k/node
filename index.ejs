@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="content-type"
+        content="text/html"; charset="UTF-8">
+    <title>mini_board</title>
+    <link rel="stylesheet" href="./style.css" type="text/css">
+    <script>
+    function init(){
+        var id = localStorage.getItem('id');
+        if (id == null) {
+            location.href = "./login";
+        }
+        document.querySelector("#id").textContent = "ID:" + id;
+        document.querySelector("#id_input").value = id;
+    }
+    </script> 
+</head>
+
+<body onload="init();">
+<head>
+    <h1>board</h1>
+</head>
+<div role="main">
+    <p>message was kept limited 10</p>
+    <form method="post" action="/">
+        <p><span id="id"></span>
+        <input type="hidden" id="id_input" name="id" value=""></p>
+        <p><input type="text" name="msg">
+        <input type="submit" value="send"></p>
+    </form>
+    <hr>
+    <p><table style="width:85%;">
+        <% for(var i in data) { %>
+            <%- include("data_item", {val:data[i]}) %>
+        <% } %>
+    </table></p>
+</div>
+</body>
+</html>
